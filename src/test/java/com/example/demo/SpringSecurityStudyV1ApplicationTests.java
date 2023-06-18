@@ -1,15 +1,17 @@
 package com.example.demo;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.demo.entity.Answer;
 import com.example.demo.entity.Question;
+import com.example.demo.repository.AnswerRepository;
 import com.example.demo.repository.QuestionRepository;
 
 @SpringBootTest
@@ -17,6 +19,9 @@ class SpringSecurityStudyV1ApplicationTests {
 	
 	@Autowired
 	private QuestionRepository questionRepository;
+	
+	@Autowired
+	private AnswerRepository answerRepository;
 	
 	@Test
 	void contextLoads() {
@@ -74,6 +79,17 @@ class SpringSecurityStudyV1ApplicationTests {
 //		assertEquals(1, this.questionRepository.count());
 		
 		/* 답변 데이터  생성 후 저장 */
+		Optional<Question> oq= this.questionRepository.findById(2);
+		assertTrue(oq.isPresent());
+		Question q = oq.get();
+		
+		Answer a = new Answer();
+		a.setContent("답변 생성 테스트 ");
+		a.setQuestion(q); //질문아이디를 알기위해서 Question객체가 필요
+		a.setCreateDate(LocalDateTime.now());
+		this.answerRepository.save(a);
+				
+		
 	}
 
 }
