@@ -9,6 +9,8 @@ import com.example.demo.entity.Question;
 public interface QuestionRepository  extends JpaRepository<Question, Integer>{
 
 	Question findBySubject(String subject);
+	
 	Question findBySubjectAndContent(String subject, String Content);
+	
 	List<Question> findBySubjectLike(String subject);
 }
