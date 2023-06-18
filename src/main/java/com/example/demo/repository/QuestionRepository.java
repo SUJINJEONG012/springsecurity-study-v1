@@ -6,4 +6,5 @@ import com.example.demo.entity.Question;
 
 public interface QuestionRepository  extends JpaRepository<Question, Integer>{
 
+	Question findBySubject(String subject);
 }
