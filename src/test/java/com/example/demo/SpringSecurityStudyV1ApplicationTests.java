@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
@@ -47,10 +48,32 @@ class SpringSecurityStudyV1ApplicationTests {
 //			
 //		}
 		
-		Question q = this.questionRepository.findBySubject("스프링부트가뭔가요 ?");
-		assertEquals(1, q.getId());
+//		Question q = this.questionRepository.findBySubject("스프링부트가뭔가요 ?");
+//		assertEquals(1, q.getId());
 		
 		
+//		List<Question> qList = this.questionRepository.findBySubjectLike("스프링%");
+//		Question q = qList.get(0);
+//		assertEquals("스프링부트가뭔가요 ?", q.getSubject());
+//		System.out.println(q.getSubject());
+		
+		
+		/* 데이터 수정 */
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q= oq.get();
+//		q.setSubject("수정된 제목");
+//		this.questionRepository.save(q);
+		
+		/* 데이터 삭제 */
+//		assertEquals(2, this.questionRepository.count());
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//		this.questionRepository.delete(q);
+//		assertEquals(1, this.questionRepository.count());
+		
+		/* 답변 데이터  생성 후 저장 */
 	}
 
 }
