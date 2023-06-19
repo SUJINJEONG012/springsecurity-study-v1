@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>질문등록</title>
-</head>
-<body>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
 
-	<h3>질문등록</h3>
 	<form th:action="@{/question/create}" method="post">
 		<div>
 			<label for="subject" class="">제목</label> <input type="text"
@@ -27,5 +22,5 @@
 
 	</form>
 
-</body>
+</div>
 </html>
