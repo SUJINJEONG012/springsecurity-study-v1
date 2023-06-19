@@ -2,7 +2,12 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
 
-	<form th:action="@{/question/create}" method="post">
+	<form th:action="@{/question/create}" th:object="${questionForm}" method="post">
+		<!-- 검증에 실패했을 경우  -->
+		<div class="" role="alert" th:if="${#fields.hasAnyErrors()}">
+		 <div th:each="err: ${#fields.allErrors()}" th:text="${err}"></div>
+		</div>
+		
 		<div>
 			<label for="subject" class="">제목</label> <input type="text"
 				name="subject" id="subject" class="">
