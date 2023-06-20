@@ -9,8 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<!-- 네비게이션 바 -->
+<header th:replace="~{header :: headerFragment}"></header>
+
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 <th:block layout:fragment="content"></th:block>
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
+
+<script th:src="@{/파일명입력.js}"></script>
 </body>
 </html>
