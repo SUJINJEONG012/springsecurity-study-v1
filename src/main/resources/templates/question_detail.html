@@ -13,8 +13,14 @@
 </ul>
 </div>
 
-<form th:action="@{|/answer/create/${question.id}|}" method="post">
-<textarea name="content" id="content" rows="15"></textarea>
+<!-- 답변작성 -->
+<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post">
+
+<div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+        </div>
+        
+<textarea name="content" th:field="*{content}" id="content" rows="15"></textarea>
 <input type="submit" value="답변등록">
 </form>
 
