@@ -22,6 +22,7 @@ public class Question {
 	
 	@Column(length=200)
 	private String subject;
+	
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	

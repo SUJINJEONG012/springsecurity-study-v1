@@ -3,20 +3,24 @@
 <div layout:fragment="content" class="container">
 
 	<form th:action="@{/question/create}" th:object="${questionForm}" method="post">
+		
 		<!-- 검증에 실패했을 경우  -->
-		<div class="" role="alert" th:if="${#fields.hasAnyErrors()}">
+		<div class="" role="alert" 
+		  th:if="${#fields.hasAnyErrors()}">
 		 <div th:each="err: ${#fields.allErrors()}" th:text="${err}"></div>
 		</div>
 		
 		<div>
-			<label for="subject" class="">제목</label> <input type="text"
+			<label for="subject" class="">제목</label> 
+			<input type="text" th:field="*{subject}"
 				name="subject" id="subject" class="">
 		</div>
+		
 
 		<div>
-			<label for="subject" class="">내용</label> 
+			<label for="content" class="">내용</label> 
 			<textarea
-				name="content" id="content" class="" rows="10">
+				name="content" id="content" class="" th:field="*{content}" rows="10">
 			</textarea>
 		</div>
 
