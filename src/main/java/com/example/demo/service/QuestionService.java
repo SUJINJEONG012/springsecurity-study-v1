@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Question;
@@ -38,6 +41,16 @@ public class QuestionService {
 		q.setContent(content);
 		q.setCreateDate(LocalDateTime.now());
 		this.questionRepository.save(q);
+	}
+	
+	/* 페이징 처리 */
+	public Page<Question> getList(int page){
+		/*Pageable 객체를 생성할때 사용한 PageRequest.of(page, 10)에서 
+		 * page는 조회할 페이지의 번호이고 10은 한 페이지에 보여줄 게시물의 갯수를 의미
+		 * 해당 페이지의 데이터만 조회하도록 쿼리가 변경
+		 * */
+		Pageable pageable = PageRequest.of(page,10);
+		return this.questionRepository.findAll(pageable);
 	}
 
 }
