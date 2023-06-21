@@ -16,10 +16,13 @@ import com.example.demo.entity.Answer;
 import com.example.demo.entity.Question;
 import com.example.demo.repository.AnswerRepository;
 import com.example.demo.repository.QuestionRepository;
+import com.example.demo.service.QuestionService;
 
 @SpringBootTest
 class SpringSecurityStudyV1ApplicationTests {
 	
+	@Autowired
+	private QuestionService questionService;
 	@Autowired
 	private QuestionRepository questionRepository;
 	
@@ -32,17 +35,17 @@ class SpringSecurityStudyV1ApplicationTests {
 	@Test
 	void contextLoads() {
 		//데이터생성
-		Question q1 = new Question();
-		q1.setSubject("스프링부트가뭔가요 ?");
-		q1.setContent("스프링 부트와 스프링의차이점을 차이점을 알기 위해 학습중입니다.");
-		q1.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q1);
-		
-		Question q2 = new Question();
-		q2.setSubject("개발이 재밌지만 잘 할 수 있을까요?");
-		q2.setContent("저는 스프링부트를 잘다룰수 있을까요 ?");
-		q2.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q2);
+//		Question q1 = new Question();
+//		q1.setSubject("스프링부트가뭔가요 ?");
+//		q1.setContent("스프링 부트와 스프링의차이점을 차이점을 알기 위해 학습중입니다.");
+//		q1.setCreateDate(LocalDateTime.now());
+//		this.questionRepository.save(q1);
+//		
+//		Question q2 = new Question();
+//		q2.setSubject("개발이 재밌지만 잘 할 수 있을까요?");
+//		q2.setContent("저는 스프링부트를 잘다룰수 있을까요 ?");
+//		q2.setCreateDate(LocalDateTime.now());
+//		this.questionRepository.save(q2);
 		
 		//데이터 조회
 //		List<Question> all = this.questionRepository.findAll();
@@ -110,6 +113,17 @@ class SpringSecurityStudyV1ApplicationTests {
 //
 //        assertEquals(1, answerList.size());
 //        assertEquals("답변 생성 테스트 ", answerList.get(0).getContent());
+		
+		
+		
+		//페이징 처리를 위해 대량 데이터 생산테스트
+		
+//		for(int i =1; i <= 300; i++) {
+//			String subject = String.format("테스트 데이터입니다. :[%03d]", i);
+//			String content= "내용 무";
+//			this.questionService.create(subject, content);
+//		}
+		
 	}
 
 }
