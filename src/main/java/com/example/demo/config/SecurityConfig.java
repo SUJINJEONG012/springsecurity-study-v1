@@ -15,12 +15,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 	
+	private static final String[] AUTH_WHITELIST = {
+            "/", "/question/**"
+    };
 	@Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests().requestMatchers(
-                new AntPathRequestMatcher("/**")).permitAll()
-                ;
-        return http.build();
+    protected SecurityFilterChain config(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(AUTH_WHITELIST)
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
+                .build();
     }
 	
 }
