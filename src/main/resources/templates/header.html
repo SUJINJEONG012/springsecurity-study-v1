@@ -1,5 +1,5 @@
 <header class="header" th:fragment="headerFragment">
-    <div class="container-fluid">
+    <div class="">
     
         <a class="navbar-brand" href="/">분리작업  </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -12,6 +12,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">로그인</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/user/signup}">회원가입</a>
+                </li>    
+                
             </ul>
         </div>
     </div>
