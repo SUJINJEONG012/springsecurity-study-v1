@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.config.DataNotFoundException;
 import com.example.demo.entity.Question;
 import com.example.demo.repository.QuestionRepository;
 
