@@ -28,7 +28,9 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest()
                         .authenticated())
+                
                 .build();
+               
     }
 	
 	@Bean
