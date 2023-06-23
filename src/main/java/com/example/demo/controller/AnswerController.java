@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +15,6 @@ import com.example.demo.entity.Question;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.QuestionService;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/answer")

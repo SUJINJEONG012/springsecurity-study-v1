@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import com.example.demo.entity.Question;
 import com.example.demo.entity.QuestionForm;
 import com.example.demo.service.QuestionService;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/question")
