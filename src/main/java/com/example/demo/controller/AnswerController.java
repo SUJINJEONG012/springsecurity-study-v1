@@ -40,6 +40,7 @@ public class AnswerController {
 		
 		Question question = this.questionService.getQuestion(id);
 		SiteUser siteUser = this.userService.getUser(principal.getName());
+		
 		//답변을저장 
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("question", question);

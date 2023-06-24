@@ -2,31 +2,59 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container">
 
-<h1 th:text="${question.subject}"></h1>
-<div th:text="${question.content}"></div>
-<h3 th:text="|${#lists.size(question.answerList)} 개의 답변이 있습니다.|"></h3>
-<h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+	<!-- 질문내용 보이기  -->
+	<h2 th:text="${question.subject}"></h2>
+	<div class="card my-3">
+		<div class="card-body">
+			<div class="card-text" style="white-space: pre-line;"
+				th:text="${question.content}"></div>
 
-<div>
-<ul>
-<li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
-</ul>
-</div>
+		</div>
+	</div>
 
-<!-- 답변작성 -->
-<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post">
+	<div>
+		<span th:if="${question.author != null}"
+			th:text="${question.author.username}"></span>
+	</div>
 
-<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 
-<!-- 로그아웃상태에선 답변 달지 못하도록 
+
+	<!--  답변 개수 보이기 -->
+	<h3 th:text="|${#lists.size(question.answerList)} 개의 답변이 있습니다.|"></h3>
+
+	<!-- 답변 반복 -->
+	<div>
+
+		<div th:each="answer : ${question.answerList}">
+
+			<div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
+			<div th:if="${question.author != null}" th:text="${question.author.username}"></div>
+			<div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+			
+		</div>
+	</div>
+
+
+
+
+	<!-- 답변작성 -->
+	<form th:action="@{|/answer/create/${question.id}|}"
+		th:object="${answerForm}" method="post">
+
+		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+
+		<!-- 로그아웃상태에선 답변 달지 못하도록 
 sec:authorize="isAnonymous()" - 현재 로그아웃 상태
 sec:authorize="isAuthenticated()" - 현재 로그인 상태
  -->
-<textarea  sec:authorize="isAnonymous()" disabled  th:field="*{content}" rows="15"></textarea>
- <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
- 
-<input type="submit" value="답변등록">
-</form>
+		<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}"
+			rows="15">
+</textarea>
+		<textarea sec:authorize="isAuthenticated()" th:field="*{content}"
+			class="form-control" rows="10"></textarea>
+
+		<input type="submit" value="답변등록">
+	</form>
 
 
 </div>
