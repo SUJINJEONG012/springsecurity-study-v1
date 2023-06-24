@@ -36,5 +36,10 @@ public class Question {
 	/* 한명의 사용자가 여러개의 질문을 할 수 있으므로 */
 	@ManyToOne
 	private SiteUser author;
+	
+	//수정한 시간 체크
+	private LocalDateTime modifyDate;
+	
+	
 
 }

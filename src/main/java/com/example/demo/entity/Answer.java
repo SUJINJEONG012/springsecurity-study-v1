@@ -37,5 +37,8 @@ public class Answer {
 	@ManyToOne
 	private SiteUser author;
 	
+	//수정한날짜 
+	private LocalDateTime modifyDate;
+	
 
 }
