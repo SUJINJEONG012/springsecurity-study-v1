@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.entity.AnswerForm;
 import com.example.demo.entity.Question;
 import com.example.demo.entity.QuestionForm;
+import com.example.demo.entity.SiteUser;
 import com.example.demo.service.QuestionService;
+import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class QuestionController {
 
 	private final QuestionService questionService;
+	private final UserService userService;
 	
 	/* 페이징 처리 추가 */
 	@GetMapping("/list")
@@ -50,11 +55,12 @@ public class QuestionController {
 	
 	/* 질문등록 버튼 클릭시 post형식으로 보내기*/
 	@PostMapping("/create")
-    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "question_form";
         }
-        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
+        SiteUser siteUser = this.userService.getUser(principal.getName());
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
         return "redirect:/question/list";
     }
 	

@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.AnswerForm;
 import com.example.demo.entity.Question;
+import com.example.demo.entity.SiteUser;
 import com.example.demo.service.AnswerService;
 import com.example.demo.service.QuestionService;
+import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,19 +28,21 @@ public class AnswerController {
 
 	private final QuestionService questionService;
 	private final AnswerService answerService;
+	private final UserService userService;
 	
 	@PostMapping("create/{id}")
 	public String createAnswer(Model model, 
 			@PathVariable("id") Integer id, 
-			@Valid AnswerForm answerForm, BindingResult bindingResult) {
+			@Valid AnswerForm answerForm, BindingResult bindingResult, Principal principal) {
 		
 		Question question = this.questionService.getQuestion(id);
+		SiteUser siteUser = this.userService.getUser(principal.getName());
 		//답변을저장 
 		if(bindingResult.hasErrors()) {
 			model.addAttribute("question", question);
 			return "question_detail";
 		}
-		this.answerService.create(question, answerForm.getContent());
+		this.answerService.create(question, answerForm.getContent(), siteUser);
 		return String.format("redirect:/question/detail/%s", id);
 	}
 }
