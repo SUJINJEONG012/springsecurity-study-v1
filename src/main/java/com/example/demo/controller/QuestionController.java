@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,12 +49,15 @@ public class QuestionController {
 	}
 	
 	/* 리스트 페이지에서 버튼클릭시 질문등록 페이지로 이동 */
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/create")
 	public String questionCreate(QuestionForm questionForm) {
 		return "question_form";
 	}
 	
 	/* 질문등록 버튼 클릭시 post형식으로 보내기*/
+	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
     public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {

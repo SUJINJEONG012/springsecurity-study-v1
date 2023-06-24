@@ -18,8 +18,13 @@
 
 <div th:replace="~{form_errors :: formErrorsFragment}"></div>
 
-
-<textarea name="content" th:field="*{content}" id="content" rows="15"></textarea>
+<!-- 로그아웃상태에선 답변 달지 못하도록 
+sec:authorize="isAnonymous()" - 현재 로그아웃 상태
+sec:authorize="isAuthenticated()" - 현재 로그인 상태
+ -->
+<textarea  sec:authorize="isAnonymous()" disabled  th:field="*{content}" rows="15"></textarea>
+ <textarea sec:authorize="isAuthenticated()" th:field="*{content}" class="form-control" rows="10"></textarea>
+ 
 <input type="submit" value="답변등록">
 </form>
 
