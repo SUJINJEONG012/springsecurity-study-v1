@@ -55,8 +55,7 @@ public class QuestionController {
 		return "question_form";
 	}
 	
-	/* 질문등록 버튼 클릭시 post형식으로 보내기*/
-	
+	/* 질문등록 버튼 클릭시 post형식으로 보내기*/	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/create")
     public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
