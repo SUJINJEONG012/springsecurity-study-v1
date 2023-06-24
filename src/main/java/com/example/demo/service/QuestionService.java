@@ -52,11 +52,12 @@ public class QuestionService {
 		/* 게시물 역순으로 조회하기 위해*/
 		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("createDate"));
+		
 		/*Pageable 객체를 생성할때 사용한 PageRequest.of(page, 10)에서 
 		 * page는 조회할 페이지의 번호이고 10은 한 페이지에 보여줄 게시물의 갯수를 의미
 		 * 해당 페이지의 데이터만 조회하도록 쿼리가 변경
 		 * */
-		Pageable pageable = PageRequest.of(page,10);
+		Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
 		return this.questionRepository.findAll(pageable);
 	}
 
