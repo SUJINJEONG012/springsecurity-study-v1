@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -31,5 +32,9 @@ public class Question {
 	
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	private List<Answer> answerList;
+	
+	/* 한명의 사용자가 여러개의 질문을 할 수 있으므로 */
+	@ManyToOne
+	private SiteUser author;
 
 }
