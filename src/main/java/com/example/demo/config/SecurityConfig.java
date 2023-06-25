@@ -27,8 +27,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.csrf().disable()
-				.authorizeRequests().antMatchers("/", "/user/**", "/question/**")
+		http.authorizeRequests().antMatchers("/", "/user/**", "/question/**")
 				
 				.permitAll() // 로그인하지않고 모두 궈한을 가짐
 				//.anyRequest().authenticated()

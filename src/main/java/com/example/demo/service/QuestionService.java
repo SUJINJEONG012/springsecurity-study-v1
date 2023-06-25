@@ -61,6 +61,7 @@ public class QuestionService {
 		return this.questionRepository.findAll(pageable);
 	}
 	
+	
 	/* 질문 수정 */
 	public void modify(Question question, String subject, String content) {
 		question.setSubject(subject);
