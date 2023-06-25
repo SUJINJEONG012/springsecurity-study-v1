@@ -47,5 +47,10 @@ public class AnswerService {
 	public void delete(Answer answer) {
 		this.answerRepository.delete(answer);
 	}
+	//추천인 저장 
+	public void vote(Answer answer, SiteUser siteUser) {
+		answer.getVoter().add(siteUser);
+		this.answerRepository.save(answer);
+	}
 	
 }

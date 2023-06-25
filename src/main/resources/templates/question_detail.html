@@ -76,6 +76,13 @@
 			<!-- <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div> -->
 
 <div>
+
+ 	<!--답변 추천 --> 
+ 	
+ 		<a href="javascript:void(0)" class="recommend" 
+ 		th:data-uri="@{|/answer/vote/${answer.id}|}">추천
+ 		<span th:text="${#lists.size(answer.voter)}"></span> 
+ 		</a> 
 		<a th:href="@{|/answer/modify/${answer.id}|}" class=""
 			sec:authorize="isAuthenticated()"
 			th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
@@ -125,7 +132,7 @@ sec:authorize="isAuthenticated()" - 현재 로그인 상태
 			});
 		});
 		
-		//추천
+		// 질문 추천
 		const recommend_elements = document.getElementsByClassName("recommend");
 		Array.from(recommend_elements).forEach(function(element){
 			element.addEventListener('click', function(){
