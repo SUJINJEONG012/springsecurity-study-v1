@@ -1,12 +1,14 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
@@ -40,5 +42,8 @@ public class Answer {
 	//수정한날짜 
 	private LocalDateTime modifyDate;
 	
+	//추천인
+	@ManyToMany
+	Set<SiteUser> voter;
 
 }
