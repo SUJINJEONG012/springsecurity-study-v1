@@ -19,11 +19,19 @@
 		<span th:if="${question.author != null}"
 			th:text="${question.author.username}"></span>
 	</div>
-	<div
-		th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+	
+	<!-- 수정날짜  -->
+	<div th:if="${question.modifyDate != null}" class="">
+	<div>수정날짜 <span th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></div>
+	</div>
+	<!-- <div
+		th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}">
+		
+	</div> -->
 	<!-- 수정 버튼, 로그인사용자와 글쓴이 확인  
 			#authentication.getPrincipal()은 Principal 객체를 리턴하는 타임리프의 유틸리티이다.
 			-->
+	
 	<div>
 		<a th:href="@{|/question/modify/${question.id}|}" class=""
 			sec:authorize="isAuthenticated()"
@@ -53,8 +61,12 @@
 				th:text="${answer.content}"></div>
 			<div th:if="${question.author != null}"
 				th:text="${answer.author.username}"></div>
-
-			<div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+				
+				<!-- 수정 날짜  -->
+				<div th:if="${answer.modifyDate != null}">
+				 <div>수정날짜 <span th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></div>
+				</div>
+			<!-- <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div> -->
 
 <div>
 		<a th:href="@{|/answer/modify/${answer.id}|}" class=""
