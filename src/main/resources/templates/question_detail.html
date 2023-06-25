@@ -33,6 +33,13 @@
 			-->
 	
 	<div>
+	<!-- 추천 -->
+	<a href="javascript:void(0);" class="recommend" 
+	th:data-uri="@{|/question/vote/${question.id}|}">추천 
+	<span class="" th:text="${#lists.size(question.voter)}"></span>
+	</a>
+	
+	
 		<a th:href="@{|/question/modify/${question.id}|}" class=""
 			sec:authorize="isAuthenticated()"
 			th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
@@ -117,6 +124,17 @@ sec:authorize="isAuthenticated()" - 현재 로그인 상태
 				;
 			});
 		});
+		
+		//추천
+		const recommend_elements = document.getElementsByClassName("recommend");
+		Array.from(recommend_elements).forEach(function(element){
+			element.addEventListener('click', function(){
+				if(confirm("정말로 추천하시겠습니까?")){
+					location.href= this.dataset.uri;
+				}
+			});
+		});
+		
 	</script>
 
 
