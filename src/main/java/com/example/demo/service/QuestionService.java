@@ -56,19 +56,8 @@ public class QuestionService {
 		};
  	} 
 	
-	/* 검색어를 의미하는 kw매개변수를 getList에 추가하고 kw값으로 Specification객체를 생성하여 findAll() 메서드 호출시 전달 */
-	public Page<Question> getList(int page, String kw){
-		List<Sort.Order> sorts = new ArrayList<>();
-		sorts.add(Sort.Order.desc("createDate"));
-		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-		Specification<Question> spec = search(kw);
-		return this.questionRepository.findAll( spec, pageable);
-	}
 	
-	
-	
-	
-	
+
 	public List<Question> getList() {
 		return this.questionRepository.findAll();
 	}
@@ -93,7 +82,8 @@ public class QuestionService {
 	}
 	
 	/* 페이징 처리 */
-	public Page<Question> getList(int page){
+	/* 검색어를 의미하는 kw매개변수를 getList에 추가하고 kw값으로 Specification객체를 생성하여 findAll() 메서드 호출시 전달 */
+	public Page<Question> getList(int page, String kw){
 		/* 게시물 역순으로 조회하기 위해*/
 		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("createDate"));
@@ -103,8 +93,14 @@ public class QuestionService {
 		 * 해당 페이지의 데이터만 조회하도록 쿼리가 변경
 		 * */
 		Pageable pageable = PageRequest.of(page,10, Sort.by(sorts));
-		return this.questionRepository.findAll(pageable);
+		
+		Specification<Question> spec = search(kw);
+		
+		return this.questionRepository.findAll(spec, pageable);
 	}
+	
+	
+	
 	
 	
 	/* 질문 수정 */
