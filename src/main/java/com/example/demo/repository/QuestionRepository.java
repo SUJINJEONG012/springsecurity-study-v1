@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.Question;
@@ -18,4 +19,7 @@ public interface QuestionRepository  extends JpaRepository<Question, Integer>{
 	
 	/*Pageable 객체를 입력으로 받아 Page<Question> 타입 객체를 리턴하는 findAll 메서드를 생성*/
 	Page<Question> findAll(Pageable pageable);
+	
+	Page<Question> findAll(Specification<Question> spec, Pageable pageable);
+	
 }
