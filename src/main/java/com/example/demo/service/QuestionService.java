@@ -54,7 +54,16 @@ public class QuestionService {
 						cb.like(u2.get("username"), "%" + kw + "%"));
 			}
 		};
- 	}
+ 	} 
+	
+	/* 검색어를 의미하는 kw매개변수를 getList에 추가하고 kw값으로 Specification객체를 생성하여 findAll() 메서드 호출시 전달 */
+	public Page<Question> getList(int page, String kw){
+		List<Sort.Order> sorts = new ArrayList<>();
+		sorts.add(Sort.Order.desc("createDate"));
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+		Specification<Question> spec = search(kw);
+		return this.questionRepository.findAll( spec, pageable);
+	}
 	
 	
 	

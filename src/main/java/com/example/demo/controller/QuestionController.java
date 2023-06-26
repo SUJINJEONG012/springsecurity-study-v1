@@ -34,6 +34,15 @@ public class QuestionController {
 	private final QuestionService questionService;
 	private final UserService userService;
 	
+	/*검색 */
+	public String list(Model model, @RequestParam(value= "page", defaultValue="0") int page,
+			@RequestParam(value="kw", defaultValue="") String kw) {
+		Page<Question> paging= this.questionService.getList(page, kw);
+		model.addAttribute("paging",paging);
+		model.addAttribute("kw", kw);
+		return "question_list";
+	}
+	
 	/* 페이징 처리 추가 */
 	@GetMapping("/list")
 	public String list(Model model, @RequestParam(value="page", defaultValue="0") int page) {
